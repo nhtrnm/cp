@@ -1,0 +1,43 @@
+---
+# /home/nam/.cursor-server/extensions/ms-vscode.cpptools-1.23.6-linux-x64/LLVM/bin/clang-format --version
+# https://releases.llvm.org/19.1.0/tools/clang/docs/ClangFormatStyleOptions.html
+Language                                 : Cpp
+BasedOnStyle                             : LLVM
+AccessModifierOffset                     : -4
+AllowAllArgumentsOnNextLine              : false
+AllowAllParametersOfDeclarationOnNextLine: false
+AllowShortFunctionsOnASingleLine         : Empty
+BinPackArguments                         : false
+BinPackParameters                        : false
+BraceWrapping                            :
+  AfterCaseLabel                         : false
+  AfterClass                             : true
+  AfterControlStatement                  : MultiLine
+  AfterEnum                              : true
+  AfterExternBlock                       : true
+  AfterFunction                          : true
+  AfterNamespace                         : true
+  AfterObjCDeclaration                   : true
+  AfterStruct                            : true
+  AfterUnion                             : true
+  BeforeCatch                            : true
+  BeforeElse                             : true
+  BeforeLambdaBody                       : false
+  BeforeWhile                            : true
+  IndentBraces                           : false
+  SplitEmptyFunction                     : false
+  SplitEmptyRecord                       : false
+  SplitEmptyNamespace                    : false
+# BreakBeforeBinaryOperators               : NonAssignment
+BreakBeforeBraces                        : Custom
+BreakTemplateDeclarations                : Yes
+ColumnLimit                              : 88
+FixNamespaceComments                     : false
+# IndentCaseLabels                         : false
+IndentWidth                              : 4
+NamespaceIndentation                     : All
+# PointerAlignment                         : Right
+# ReferenceAlignment                       : Pointer
+TabWidth                                 : 4
+# UseTab                                   : Never
+...

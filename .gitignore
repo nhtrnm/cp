@@ -1,0 +1,8 @@
+# .gitkeep files are dummy placeholders - git doesn't track empty directories,
+# so .gitkeep forces an otherwise empty directory to be included in the repo.
+build/
+*.o
+*.d
+*.a
+*.out
+.DS_Store
