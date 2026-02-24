@@ -75,3 +75,14 @@ TEST_CASE(offset_fenwick_point_update)
     fw.add(5, 10);
     EXPECT_EQ(fw.query(3, 5), 16); // 1+2+13
 }
+
+TEST_CASE(offset_fenwick_assertions)
+{
+    EXPECT_ABORT(cp::OffsetFenwick<int> fw(3, 7); fw.add(2, 1));   // idx < lo
+    EXPECT_ABORT(cp::OffsetFenwick<int> fw(3, 7); fw.add(8, 1));   // idx > hi
+    EXPECT_ABORT(cp::OffsetFenwick<int> fw(3, 7); fw.query(2));    // idx < lo
+    EXPECT_ABORT(cp::OffsetFenwick<int> fw(3, 7); fw.query(8));    // idx > hi
+    EXPECT_ABORT(cp::OffsetFenwick<int> fw(3, 7); fw.query(2, 5)); // ql < lo
+    EXPECT_ABORT(cp::OffsetFenwick<int> fw(3, 7); fw.query(4, 8)); // qr > hi
+    EXPECT_ABORT(cp::OffsetFenwick<int> fw(3, 7); fw.query(6, 4)); // ql > qr
+}
