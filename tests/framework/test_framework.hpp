@@ -42,6 +42,16 @@ namespace cp_test
     }                                                                                  \
     while (0)
 
+#define EXPECT_FALSE(expr)                                                             \
+    do {                                                                               \
+        if (expr) {                                                                    \
+            throw std::runtime_error(                                                  \
+                std::string("EXPECT_FALSE failed: " #expr " at " __FILE__ ":") +       \
+                std::to_string(__LINE__));                                             \
+        }                                                                              \
+    }                                                                                  \
+    while (0)
+
 #define EXPECT_EQ(a, b)                                                                \
     do {                                                                               \
         if (!((a) == (b))) {                                                           \
