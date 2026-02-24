@@ -15,17 +15,17 @@ namespace cp
     // T must be wide enough to hold val * n without overflow (use ll, not int). T must
     // be an integer type because lazy[v] == T{} uses exact equality.
     template <typename T>
-    struct RangeSumSegTree
+    struct SumRangeSegTree
     {
         int n;
         vector<T> tree;
         vector<T> lazy;
 
         // O(n) time, O(n) space
-        RangeSumSegTree(int size) : n(size), tree(4 * size, T{}), lazy(4 * size, T{}) {}
+        SumRangeSegTree(int size) : n(size), tree(4 * size, T{}), lazy(4 * size, T{}) {}
 
         // O(n) time, O(n) space - builds from initial values
-        RangeSumSegTree(const vector<T> &a)
+        SumRangeSegTree(const vector<T> &a)
             : n(a.size()), tree(4 * a.size(), T{}), lazy(4 * a.size(), T{})
         {
             build(1, 0, n - 1, a);
@@ -104,4 +104,7 @@ namespace cp
             return query(2 * v, tl, mid, l, r) + query(2 * v + 1, mid + 1, tr, l, r);
         }
     };
+
+    // Convenience alias for the common case of summing long long values.
+    using LongSumRangeSegTree = SumRangeSegTree<ll>;
 } // namespace cp
