@@ -1,6 +1,4 @@
 ---
-# /home/nam/.cursor-server/extensions/ms-vscode.cpptools-1.23.6-linux-x64/LLVM/bin/clang-format --version
-# https://releases.llvm.org/19.1.0/tools/clang/docs/ClangFormatStyleOptions.html
 Language                                 : Cpp
 BasedOnStyle                             : LLVM
 AccessModifierOffset                     : -4
