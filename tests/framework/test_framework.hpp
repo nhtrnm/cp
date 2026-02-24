@@ -111,6 +111,8 @@ namespace cp_test
     do {                                                                               \
         pid_t pid = fork();                                                            \
         if (pid == 0) {                                                                \
+            /* suppress assert() error message printed by child */                     \
+            close(STDERR_FILENO);                                                      \
             expr;                                                                      \
             _exit(0);                                                                  \
         }                                                                              \
