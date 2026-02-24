@@ -2,6 +2,8 @@
 #include <cstdlib>
 #include <iostream>
 
+using namespace std;
+
 int main()
 {
     auto &tests = cp_test::Registry();
@@ -11,15 +13,15 @@ int main()
     for (auto &tc : tests) {
         try {
             tc.fn();
-            std::cout << "[PASS] " << tc.name << "\n";
+            cout << "[PASS] " << tc.name << "\n";
             ++passed;
         }
-        catch (const std::exception &e) {
-            std::cout << "[FAIL] " << tc.name << ": " << e.what() << "\n";
+        catch (const exception &e) {
+            cout << "[FAIL] " << tc.name << ": " << e.what() << "\n";
             ++failed;
         }
     }
 
-    std::cout << "\n" << passed << "/" << (passed + failed) << " tests passed.\n";
+    cout << "\n" << passed << "/" << (passed + failed) << " tests passed.\n";
     return failed > 0 ? EXIT_FAILURE : EXIT_SUCCESS;
 }
