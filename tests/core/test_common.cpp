@@ -10,5 +10,5 @@ TEST_CASE(typedefs_are_correct_sizes)
 TEST_CASE(inf_constants_are_positive)
 {
     EXPECT_TRUE(cp::INF > 0);
-    EXPECT_TRUE(cp::INF > 0);
+    EXPECT_TRUE(cp::INF64 > 0);
 }
