@@ -1,4 +1,9 @@
 ---
+# Options are compatible with clang-format 19.1.0:
+# https://releases.llvm.org/19.1.0/tools/clang/docs/ClangFormatStyleOptions.html
+# 
+# Commented options match LLVM defaults and are kept here explicitly as settings worth
+# preserving - revisit them if BasedOnStyle changes.
 Language                                 : Cpp
 BasedOnStyle                             : LLVM
 AccessModifierOffset                     : -4
@@ -26,16 +31,22 @@ BraceWrapping                            :
   SplitEmptyFunction                     : false
   SplitEmptyRecord                       : false
   SplitEmptyNamespace                    : false
-# BreakBeforeBinaryOperators               : NonAssignment
 BreakBeforeBraces                        : Custom
 BreakTemplateDeclarations                : Yes
 ColumnLimit                              : 88
-FixNamespaceComments                     : false
+# FixNamespaceComments                     : true
+# IndentAccessModifiers                    : false
 # IndentCaseLabels                         : false
 IndentWidth                              : 4
-NamespaceIndentation                     : All
+InsertNewlineAtEOF                       : true
+# NamespaceIndentation                     : None
+PackConstructorInitializers              : CurrentLine
 # PointerAlignment                         : Right
 # ReferenceAlignment                       : Pointer
+# ReflowComments                           : true
+SeparateDefinitionBlocks                 : Always
+# SpaceAfterCStyleCast                     : false
+Standard                                 : c++20
 TabWidth                                 : 4
 # UseTab                                   : Never
 ...
