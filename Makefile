@@ -1,9 +1,15 @@
 # := is immediate assignment - evaluated once, not re-evaluated each use (contrast with
 # = which is lazy and re-evaluated every time).
-CXX      := g++
-CXXFLAGS := -std=c++20 -O2 -Wall -Wextra -Wshadow -Wpedantic -Iinclude
-BUILD    := build
-TARGET   := $(BUILD)/tests  # $() expands a variable: $(BUILD) becomes "build"
+CXX := g++
+
+# -MMD: writes a .d file per .o listing every project header included; Make reads these
+# to recompile the right .o files when a header changes.
+# -MP: adds an empty phony rule per header in the .d so Make does not error with "No
+# rule to make target '...'" when a header is deleted or renamed.
+CXXFLAGS := -std=c++20 -O2 -Wall -Wextra -Wshadow -Wpedantic -Iinclude -MMD -MP
+
+BUILD  := build
+TARGET := $(BUILD)/tests  # $() expands a variable: $(BUILD) becomes "build"
 
 # $(shell ...) runs a shell command at parse time and captures its stdout.
 SRCS := $(shell find tests -name '*.cpp' ! -path '*/framework/*')
@@ -11,6 +17,14 @@ SRCS := $(shell find tests -name '*.cpp' ! -path '*/framework/*')
 # $(patsubst pattern, replacement, text) - substitutes each match of tests/%.cpp with
 # build/%.o, e.g. tests/core/test_common.cpp -> build/core/test_common.o.
 OBJS := $(patsubst tests/%.cpp, $(BUILD)/%.o, $(SRCS))
+
+# $(var:.o=.d) is a substitution reference - shorthand for patsubst, replaces .o with .d
+# for each entry.
+DEPS := $(OBJS:.o=.d)
+
+# First build: no .d files yet - -include skips them silently (plain include errors).
+# Later builds: Make loads them to recompile only the .o files whose headers changed.
+-include $(DEPS)
 
 # .PHONY declares targets that are not real files. Without it, if a file named "test" or
 # "clean" existed on disk, make would skip running that target.
