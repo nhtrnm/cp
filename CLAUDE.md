@@ -5,7 +5,7 @@
 Run formatting then tests automatically - do not wait to be asked:
 
 ```bash
-git diff --name-only --diff-filter=ACM | \
+{ git diff --name-only --diff-filter=ACM; git ls-files --others --exclude-standard; } | \
   grep -E '\.(cpp|hpp|h|cc|cxx)$' | \
   xargs -r clang-format-19 -i
 make test

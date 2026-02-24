@@ -61,6 +61,6 @@ clean:
 # $$ is a literal $ in make - needed here for the regex end-of-string anchor.
 # xargs -r skips running clang-format-19 if the file list is empty.
 fmt:
-	git diff --name-only --diff-filter=ACM | \
+	{ git diff --name-only --diff-filter=ACM; git ls-files --others --exclude-standard; } | \
 	  grep -E '\.(cpp|hpp|h|cc|cxx)$$' | \
 	  xargs -r clang-format-19 -i
