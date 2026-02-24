@@ -5,6 +5,7 @@ namespace cp
 {
     // DSU (disjoint set union) - tracks and merges disjoint sets with near-constant
     // time operations.
+    //
     // a(n) refers to the inverse Ackermann function, which grows so slowly it is
     // effectively O(1) for all practical input sizes.
     struct DSU
@@ -22,10 +23,7 @@ namespace cp
         // Returns the root of u's set. O(a(n)) amortized.
         int find(int u)
         {
-            if (u == parents[u]) {
-                return u;
-            }
-            return parents[u] = find(parents[u]);
+            return u == parents[u] ? u : (parents[u] = find(parents[u]));
         }
 
         // Returns true if u and v are in the same set. O(a(n)) amortized.
