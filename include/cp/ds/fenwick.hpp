@@ -46,4 +46,40 @@ namespace cp
             return query(r) - query(l - 1);
         }
     };
+
+    // Fenwick tree over an arbitrary index range [l, r].
+    // Indices are shifted internally to [0, r-l] and delegated to Fenwick<T>.
+    template <typename T>
+    struct OffsetFenwick
+    {
+        int lo, hi;
+        Fenwick<T> fw;
+
+        // O(n) time, O(n) space. n = hi - lo + 1.
+        OffsetFenwick(int l, int r) : lo(l), hi(r), fw(r - l + 1) {}
+
+        // O(n log n) time - builds from an existing array over [l, l + a.size() - 1].
+        OffsetFenwick(int l, const vector<T> &a) : lo(l), hi(l + a.size() - 1), fw(a) {}
+
+        // Adds delta to index idx. O(log n) time.
+        void add(int idx, T delta)
+        {
+            assert(idx >= lo && idx <= hi);
+            fw.add(idx - lo, delta);
+        }
+
+        // Returns the prefix sum [lo, idx]. O(log n) time.
+        T query(int idx) const
+        {
+            assert(idx >= lo && idx <= hi);
+            return fw.query(idx - lo);
+        }
+
+        // Returns the range sum [ql, qr]. O(log n) time.
+        T query(int ql, int qr) const
+        {
+            assert(ql >= lo && qr <= hi && ql <= qr);
+            return fw.query(ql - lo, qr - lo);
+        }
+    };
 } // namespace cp

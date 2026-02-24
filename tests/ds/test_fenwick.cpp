@@ -45,3 +45,33 @@ TEST_CASE(fenwick_query_single_at_zero)
     cp::Fenwick<int> fw({1, 2, 3, 4, 5});
     EXPECT_EQ(fw.query(0, 0), 1);
 }
+
+TEST_CASE(offset_fenwick_prefix_sum)
+{
+    // array [1, 2, 3, 4, 5] over indices [3, 7]
+    cp::OffsetFenwick<int> fw(3, {1, 2, 3, 4, 5});
+    EXPECT_EQ(fw.query(3), 1);  // prefix [3,3] = 1
+    EXPECT_EQ(fw.query(5), 6);  // prefix [3,5] = 1+2+3
+    EXPECT_EQ(fw.query(7), 15); // prefix [3,7] = 1+2+3+4+5
+}
+
+TEST_CASE(offset_fenwick_range_query)
+{
+    cp::OffsetFenwick<int> fw(3, {1, 2, 3, 4, 5});
+    EXPECT_EQ(fw.query(4, 6), 9);  // 2+3+4
+    EXPECT_EQ(fw.query(3, 7), 15); // entire range
+    EXPECT_EQ(fw.query(5, 5), 3);  // single element
+}
+
+TEST_CASE(offset_fenwick_point_update)
+{
+    cp::OffsetFenwick<int> fw(3, 7);
+    fw.add(3, 1);
+    fw.add(4, 2);
+    fw.add(5, 3);
+    fw.add(6, 4);
+    fw.add(7, 5);
+    EXPECT_EQ(fw.query(3, 7), 15);
+    fw.add(5, 10);
+    EXPECT_EQ(fw.query(3, 5), 16); // 1+2+13
+}
