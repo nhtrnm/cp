@@ -31,25 +31,25 @@
 
 namespace cp_test
 {
-    struct TestCase
-    {
-        std::string name;
-        std::function<void()> fn;
-    };
+struct TestCase
+{
+    std::string name;
+    std::function<void()> fn;
+};
 
-    inline std::vector<TestCase> &Registry()
+inline std::vector<TestCase> &Registry()
+{
+    static std::vector<TestCase> reg;
+    return reg;
+}
+
+struct TestRegistrar
+{
+    TestRegistrar(const std::string &name, std::function<void()> fn)
     {
-        static std::vector<TestCase> reg;
-        return reg;
+        Registry().push_back({name, fn});
     }
-
-    struct TestRegistrar
-    {
-        TestRegistrar(const std::string &name, std::function<void()> fn)
-        {
-            Registry().push_back({name, fn});
-        }
-    };
+};
 
 #define TEST_CASE(name)                                                                \
     static void _test_##name();                                                        \
