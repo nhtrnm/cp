@@ -46,8 +46,10 @@ namespace cp
             update(root, lo, hi, l, r, val);
         }
 
-        // O(log(hi - lo)) time, O(log(hi - lo)) space - returns sum of elements in
-        // [l, r]. Note: has side effects - push_down may allocate child nodes.
+        // O(log(hi - lo)) time, O(log(hi - lo)) space - returns sum of elements in [l,
+        // r].
+        //
+        // Note: has side effects - push_down may allocate child nodes.
         T query(ll l, ll r)
         {
             assert(l >= lo && r <= hi && l <= r);
