@@ -34,6 +34,7 @@ DEPS := $(OBJS:.o=.d)
 #   target: prerequisites
 #   <TAB> recipe
 # make runs the recipe when the target is out of date relative to its prerequisites.
+# Without target, make runs the first-defined target's recipe.
 
 build: $(TARGET)
 
