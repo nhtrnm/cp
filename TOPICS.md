@@ -9,11 +9,10 @@ Legend: [x] implemented, [ ] not implemented
 - [x] Fenwick Tree (BIT) - point update, prefix sum
 - [x] Fenwick Tree - range update, range sum (offset trick)
 - [x] Segment Tree - point update, range query
-- [x] Segment Tree - range update (lazy), range sum (`SumRangeSegTree`)
+- [x] Segment Tree - range update (lazy), range sum (`SumAddRangeSegTree`, specialized)
+- [x] Segment Tree - policy-based lazy: range-add/set/add+set, sum/min (`RangeSegTree`)
 - [x] Dynamic Segment Tree - range add, range sum (`DynSegTree`)
 - [x] DSU (Union-Find) - union by size
-- [ ] Segment Tree - range update (lazy), range min/max
-- [ ] Segment Tree - range set + range sum
 - [ ] Segment Tree beats (Ji driver segmentation)
 - [ ] Persistent Segment Tree
 - [ ] Merge Sort Tree (segment tree of sorted arrays)

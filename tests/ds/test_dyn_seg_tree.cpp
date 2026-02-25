@@ -54,3 +54,12 @@ TEST_CASE(dyn_seg_tree_assertions)
     EXPECT_ABORT(st.query(5, 3));
     EXPECT_ABORT((cp::DynSegTree<cp::ll>(5, 3)));
 }
+
+TEST_CASE(dyn_seg_tree_const_query)
+{
+    cp::DynSegTree<cp::ll> st(0, 9);
+    st.update(0, 9, 2);
+    const cp::DynSegTree<cp::ll> &cst = st;
+    EXPECT_EQ(cst.query(0, 9), 20LL);
+    EXPECT_EQ(cst.query(3, 6), 8LL);
+}
