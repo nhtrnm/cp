@@ -37,19 +37,15 @@ struct DynSegTree
         assert(l <= r);
     }
 
-    // O(log(hi - lo)) time, O(log(hi - lo)) space - adds val to every element in
-    // [l, r].
+    // Adds val to every element in [l, r]. O(log(hi - lo)) time, O(log(hi - lo)) space.
     void update(ll l, ll r, T val)
     {
         assert(l >= lo && r <= hi && l <= r);
         update(root, lo, hi, l, r, val);
     }
 
-    // O(log(hi - lo)) time, O(log(hi - lo)) space - returns sum of elements in [l,
-    // r].
-    //
-    // Note: has side effects - push_down may allocate child nodes.
-    T query(ll l, ll r)
+    // Returns sum of elements in [l, r]. O(log(hi - lo)) time, O(1) space.
+    T query(ll l, ll r) const
     {
         assert(l >= lo && r <= hi && l <= r);
         return query(root, lo, hi, l, r);
@@ -59,16 +55,17 @@ private:
     // Pushes lazy down to children, creating them if needed.
     void push_down(Node *node, ll tl, ll tr)
     {
-        if (node->lazy == T{}) {
-            return;
-        }
-        ll mid = tl + (tr - tl) / 2; // avoids overflow vs (tl + tr) / 2
+        assert(tl < tr); // cannot apply to leaves
         if (!node->left) {
             node->left = new Node();
         }
         if (!node->right) {
             node->right = new Node();
         }
+        if (node->lazy == T{}) {
+            return;
+        }
+        ll mid = tl + (tr - tl) / 2; // avoids overflow vs (tl + tr) / 2
         node->left->val += node->lazy * (mid - tl + 1);
         node->left->lazy += node->lazy;
         node->right->val += node->lazy * (tr - mid);
@@ -88,19 +85,21 @@ private:
         }
         push_down(node, tl, tr);
         ll mid = tl + (tr - tl) / 2; // avoids overflow vs (tl + tr) / 2
-        if (!node->left) {
-            node->left = new Node();
-        }
-        if (!node->right) {
-            node->right = new Node();
-        }
         update(node->left, tl, mid, l, r, val);
         update(node->right, mid + 1, tr, l, r, val);
         node->val = node->left->val + node->right->val;
     }
 
     // Returns T{} for null nodes (unvisited subtrees are implicitly zero).
-    T query(Node *node, ll tl, ll tr, ll l, ll r)
+    //
+    // push_down is not called - it would allocate nodes inside a read-only operation.
+    // Instead, at each partial overlap, node->lazy * overlap([l,r], [tl,tr]) is added
+    // to correct for the pending lazy. This adds complexity over push_down (which
+    // pushes all info to children to be summed directly), but keeps query const.
+    //
+    // Null children return T{} safely since ancestor lazies are handled by the overlap
+    // term above them.
+    T query(const Node *node, ll tl, ll tr, ll l, ll r) const
     {
         if (!node || r < tl || tr < l) {
             return T{};
@@ -108,9 +107,10 @@ private:
         if (l <= tl && tr <= r) {
             return node->val;
         }
-        push_down(node, tl, tr);
         ll mid = tl + (tr - tl) / 2; // avoids overflow vs (tl + tr) / 2
-        return query(node->left, tl, mid, l, r) + query(node->right, mid + 1, tr, l, r);
+        return query(node->left, tl, mid, l, r) +
+               query(node->right, mid + 1, tr, l, r) +
+               node->lazy * (min(tr, r) - max(tl, l) + 1);
     }
 };
 } // namespace cp
