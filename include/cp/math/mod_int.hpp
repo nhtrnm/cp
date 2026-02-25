@@ -4,6 +4,7 @@
 namespace cp
 {
 // Modular integer with compile-time modulus.
+//
 // M must be a prime for inv() to be correct (uses Fermat's little theorem).
 template <int M>
 struct ModInt

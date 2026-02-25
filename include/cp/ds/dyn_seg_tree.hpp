@@ -3,26 +3,25 @@
 
 namespace cp
 {
-// Pointer-based lazy segment tree over an arbitrary range [lo, hi] supporting
-// range-add updates and range-sum queries.
+// Pointer-based lazy segment tree over an arbitrary range [lo, hi] supporting range-add
+// updates and range-sum queries.
 //
-// Nodes are allocated on demand, making it efficient for large but sparse ranges
-// (e.g. coordinates up to 1e9 with few updates). Memory is not freed on
-// destruction, meant for single-use CP problems. Total space: O(q * log(hi - lo))
-// across q operations.
+// Nodes are allocated on demand, making it efficient for large but sparse ranges (e.g.
+// coordinates up to 1e9 with few updates). Memory is not freed on destruction, meant
+// for single-use CP problems. Total space: O(q * log(hi - lo)) across q operations.
 //
-// T must be wide enough to hold lazy * (hi - lo + 1) without overflow. For
-// ranges up to 1e9 with values up to 1e9, use ll (not int).
+// T must be wide enough to hold lazy * (hi - lo + 1) without overflow. For ranges up to
+// 1e9 with values up to 1e9, use ll (not int).
 //
-// To adapt for other operations (e.g. range-set, range-min), modify push_down to
-// use the appropriate lazy-application and combine logic.
+// To adapt for other operations (e.g. range-set, range-min), modify push_down to use
+// the appropriate lazy-application and combine logic.
 template <typename T>
 struct DynSegTree
 {
     struct Node
     {
-        T val;  // aggregate sum over this segment
-        T lazy; // pending add to every element in this segment
+        T val;
+        T lazy;
         Node *left;
         Node *right;
 
@@ -32,14 +31,14 @@ struct DynSegTree
     ll lo, hi;
     Node *root;
 
-    // O(1) time, O(1) space
+    // O(1) time, O(1) space.
     DynSegTree(ll l, ll r) : lo(l), hi(r), root(new Node())
     {
         assert(l <= r);
     }
 
     // O(log(hi - lo)) time, O(log(hi - lo)) space - adds val to every element in
-    // [l, r]
+    // [l, r].
     void update(ll l, ll r, T val)
     {
         assert(l >= lo && r <= hi && l <= r);

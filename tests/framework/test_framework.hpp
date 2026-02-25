@@ -105,8 +105,8 @@ struct TestRegistrar
     }                                                                                  \
     while (0)
 
-// Forks a child process, runs expr, and expects it to abort (SIGABRT).
-// Used to test assert() calls.
+// Forks a child process, runs expr, and expects it to abort (SIGABRT). Used to test
+// assert() calls.
 #define EXPECT_ABORT(expr)                                                             \
     do {                                                                               \
         pid_t pid = fork();                                                            \

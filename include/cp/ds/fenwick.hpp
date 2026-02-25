@@ -3,7 +3,9 @@
 
 namespace cp
 {
-// Fenwick tree (Binary Indexed Tree) - 0-indexed.
+// Fenwick tree (Binary Indexed Tree) - 0-indexed, supports point-add updates and
+// range-sum queries.
+//
 // Reference: https://cp-algorithms.com/data_structures/fenwick.html
 template <typename T>
 struct Fenwick
@@ -48,6 +50,7 @@ struct Fenwick
 };
 
 // Fenwick tree over an arbitrary index range [l, r].
+//
 // Indices are shifted internally to [0, r-l] and delegated to Fenwick<T>.
 template <typename T>
 struct OffsetFenwick

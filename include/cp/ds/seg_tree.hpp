@@ -5,14 +5,14 @@ namespace cp
 {
 // Array-backed segment tree supporting point updates and range queries.
 //
-// combine is a non-type template parameter (C++20): the callable instance is part
-// of the type, not stored as a member. This differs from the typename approach
-// where you pass the callable's type and construct an instance - with auto, calling
-// combine(...) is a direct call to a statically-known function or operator, which
-// the compiler can and should inline. The constraint: combine must be a structural
-// type (captureless lambdas, function pointers, or empty structs like plus<ll>{}).
-// Stateful or capturing callables are not supported. It must be associative with
-// identity as its neutral element.
+// combine is a non-type template parameter (C++20): the callable instance is part of
+// the type, not stored as a member. This differs from the typename approach where you
+// pass the callable's type and construct an instance - with auto, calling combine(...)
+// is a direct call to a statically-known function or operator, which the compiler can
+// and should inline. The constraint: combine must be a structural type (captureless
+// lambdas, function pointers, or empty structs like plus<ll>{}). Stateful or capturing
+// callables are not supported. It must be associative with identity as its neutral
+// element.
 //
 // Usage:
 //   SegTree<ll, plus<ll>{}> st(n);
@@ -24,23 +24,23 @@ struct SegTree
     int n;
     vector<T> tree;
 
-    // O(n) time, O(n) space
+    // O(n) time, O(n) space.
     SegTree(int size) : n(size), tree(4 * size, identity) {}
 
-    // O(n) time, O(n) space - builds from initial values
+    // O(n) time, O(n) space - builds from initial values.
     SegTree(const vector<T> &a) : n(a.size()), tree(4 * a.size(), identity)
     {
         build(1, 0, n - 1, a);
     }
 
-    // O(log n) time, O(log n) space - sets element at index idx to val
+    // O(log n) time, O(log n) space - sets element at index idx to val.
     void update(int idx, T val)
     {
         assert(idx >= 0 && idx < n);
         update(1, 0, n - 1, idx, val);
     }
 
-    // O(log n) time, O(log n) space - returns combine over [l, r]
+    // O(log n) time, O(log n) space - returns combine over [l, r].
     T query(int l, int r) const
     {
         assert(l >= 0 && r < n && l <= r);

@@ -3,8 +3,8 @@
 
 namespace cp
 {
-// DSU (disjoint set union) - tracks and merges disjoint sets with near-constant
-// time operations.
+// DSU (disjoint set union) - tracks and merges disjoint sets with near-constant time
+// operations.
 //
 // a(n) refers to the inverse Ackermann function, which grows so slowly it is
 // effectively O(1) for all practical input sizes.

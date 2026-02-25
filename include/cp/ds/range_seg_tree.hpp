@@ -5,11 +5,11 @@ namespace cp
 {
 // Array-backed segment tree supporting range-add updates and range-sum queries.
 //
-// Lazy propagation: full-overlap updates defer to lazy[v]; push_down is called
-// on partial overlaps in both update and query.
+// Lazy propagation: full-overlap updates defer to lazy[v]; push_down is called on
+// partial overlaps in both update and query.
 //
-// For range-add, push_down in query is avoidable; it is used here for
-// consistency with other range updates where that does not generalize.
+// For range-add, push_down in query is avoidable; it is used here for consistency with
+// other range updates where that does not generalize.
 //
 // T must be a wide integer type (use ll); lazy[v] == T{} requires exact equality.
 template <typename T>
@@ -19,10 +19,10 @@ struct SumRangeSegTree
     vector<T> tree;
     vector<T> lazy;
 
-    // O(n) time, O(n) space
+    // O(n) time, O(n) space.
     SumRangeSegTree(int size) : n(size), tree(4 * size, T{}), lazy(4 * size, T{}) {}
 
-    // O(n) time, O(n) space - builds from initial values
+    // O(n) time, O(n) space - builds from initial values.
     SumRangeSegTree(const vector<T> &a)
         : n(a.size()),
           tree(4 * a.size(), T{}),
@@ -31,14 +31,14 @@ struct SumRangeSegTree
         build(1, 0, n - 1, a);
     }
 
-    // O(log n) time, O(log n) space - adds val to every element in [l, r]
+    // O(log n) time, O(log n) space - adds val to every element in [l, r].
     void update(int l, int r, T val)
     {
         assert(l >= 0 && r < n && l <= r);
         update(1, 0, n - 1, l, r, val);
     }
 
-    // O(log n) time, O(log n) space - returns sum of [l, r]; redistributes lazy values
+    // O(log n) time, O(log n) space - returns sum of [l, r]; redistributes lazy values.
     T query(int l, int r)
     {
         assert(l >= 0 && r < n && l <= r);
