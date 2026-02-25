@@ -72,19 +72,6 @@ private:
         lazy[v] = T{};
     }
 
-    T query(int v, int tl, int tr, int l, int r)
-    {
-        if (r < tl || tr < l) {
-            return T{};
-        }
-        if (l <= tl && tr <= r) {
-            return tree[v];
-        }
-        push_down(v, tl, tr);
-        int mid = tl + (tr - tl) / 2; // avoids overflow vs (tl + tr) / 2
-        return query(2 * v, tl, mid, l, r) + query(2 * v + 1, mid + 1, tr, l, r);
-    }
-
     void update(int v, int tl, int tr, int l, int r, T val)
     {
         if (r < tl || tr < l) {
@@ -100,6 +87,19 @@ private:
         update(2 * v, tl, mid, l, r, val);
         update(2 * v + 1, mid + 1, tr, l, r, val);
         tree[v] = tree[2 * v] + tree[2 * v + 1];
+    }
+
+    T query(int v, int tl, int tr, int l, int r)
+    {
+        if (r < tl || tr < l) {
+            return T{};
+        }
+        if (l <= tl && tr <= r) {
+            return tree[v];
+        }
+        push_down(v, tl, tr);
+        int mid = tl + (tr - tl) / 2; // avoids overflow vs (tl + tr) / 2
+        return query(2 * v, tl, mid, l, r) + query(2 * v + 1, mid + 1, tr, l, r);
     }
 };
 
