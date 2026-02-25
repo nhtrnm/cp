@@ -20,7 +20,6 @@ BraceWrapping                            :
   AfterExternBlock                       : true
   AfterFunction                          : true
   AfterNamespace                         : true
-  AfterObjCDeclaration                   : true
   AfterStruct                            : true
   AfterUnion                             : true
   BeforeCatch                            : true
