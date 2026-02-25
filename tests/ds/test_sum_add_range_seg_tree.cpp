@@ -1,9 +1,9 @@
 #include "../framework/test_framework.hpp"
-#include "cp/ds/range_seg_tree.hpp"
+#include "cp/ds/sum_add_range_seg_tree.hpp"
 
 TEST_CASE(sum_range_seg_tree_build_and_query)
 {
-    cp::SumRangeSegTree<cp::ll> st({1, 2, 3, 4, 5});
+    cp::SumAddRangeSegTree<cp::ll> st({1, 2, 3, 4, 5});
     EXPECT_EQ(st.query(0, 4), 15LL);
     EXPECT_EQ(st.query(1, 3), 9LL);
     EXPECT_EQ(st.query(2, 2), 3LL);
@@ -11,7 +11,7 @@ TEST_CASE(sum_range_seg_tree_build_and_query)
 
 TEST_CASE(sum_range_seg_tree_range_update)
 {
-    cp::SumRangeSegTree<cp::ll> st({1, 2, 3, 4, 5});
+    cp::SumAddRangeSegTree<cp::ll> st({1, 2, 3, 4, 5});
     st.update(1, 3, 10);
     // [1, 12, 13, 14, 5]
     EXPECT_EQ(st.query(0, 4), 45LL);
@@ -22,7 +22,7 @@ TEST_CASE(sum_range_seg_tree_range_update)
 
 TEST_CASE(sum_range_seg_tree_overlapping_updates)
 {
-    cp::SumRangeSegTree<cp::ll> st(5);
+    cp::SumAddRangeSegTree<cp::ll> st(5);
     st.update(0, 4, 1); // [1, 1, 1, 1, 1]
     st.update(1, 3, 2); // [1, 3, 3, 3, 1]
     st.update(2, 2, 3); // [1, 3, 6, 3, 1]
@@ -33,7 +33,7 @@ TEST_CASE(sum_range_seg_tree_overlapping_updates)
 
 TEST_CASE(sum_range_seg_tree_default_constructed)
 {
-    cp::SumRangeSegTree<cp::ll> st(5);
+    cp::SumAddRangeSegTree<cp::ll> st(5);
     EXPECT_EQ(st.query(0, 4), 0LL);
     st.update(2, 2, 7);
     EXPECT_EQ(st.query(0, 4), 7LL);
@@ -42,7 +42,7 @@ TEST_CASE(sum_range_seg_tree_default_constructed)
 
 TEST_CASE(sum_range_seg_tree_assertions)
 {
-    cp::SumRangeSegTree<cp::ll> st(5);
+    cp::SumAddRangeSegTree<cp::ll> st(5);
     EXPECT_ABORT(st.update(-1, 2, 1));
     EXPECT_ABORT(st.update(0, 5, 1));
     EXPECT_ABORT(st.update(3, 1, 1));

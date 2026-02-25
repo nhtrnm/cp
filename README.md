@@ -24,13 +24,13 @@ make test
 
 ### `cp/ds`
 
-| Header               | Description                                               |
-| -------------------- | --------------------------------------------------------- |
-| `dsu.hpp`            | Union-find, union by size and path compression            |
-| `fenwick.hpp`        | BIT for prefix sums                                       |
-| `seg_tree.hpp`       | Segment tree, point update, range query                   |
-| `dyn_seg_tree.hpp`   | Lazy segment tree for sparse ranges, range-add, range-sum |
-| `range_seg_tree.hpp` | Segment tree, range-add, range-sum                        |
+| Header                       | Description                                               |
+| ---------------------------- | --------------------------------------------------------- |
+| `dsu.hpp`                    | Union-find, union by size and path compression            |
+| `fenwick.hpp`                | BIT for prefix sums                                       |
+| `seg_tree.hpp`               | Segment tree, point update, range query                   |
+| `dyn_seg_tree.hpp`           | Lazy segment tree for sparse ranges, range-add, range-sum |
+| `sum_add_range_seg_tree.hpp` | Segment tree, range-add, range-sum (specialized)          |
 
 ### `cp/math`
 

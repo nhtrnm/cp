@@ -3,7 +3,12 @@
 
 namespace cp
 {
-// Array-backed segment tree supporting range-add updates and range-sum queries.
+// Specialized array-backed segment tree for range-add updates and range-sum queries.
+//
+// A general policy-based LazySegTree (range_seg_tree.hpp) also exists and covers this
+// and other combinations (range-set, range-min, etc.). This version is kept as a
+// simpler, self-contained alternative - useful when the policy abstraction overhead is
+// not worth it for a problem that just needs range-add + range-sum.
 //
 // Lazy propagation: full-overlap updates defer to lazy[v]; push_down is called on
 // partial overlaps in both update and query.
@@ -13,17 +18,17 @@ namespace cp
 //
 // T must be a wide integer type (use ll); lazy[v] == T{} requires exact equality.
 template <typename T>
-struct SumRangeSegTree
+struct SumAddRangeSegTree
 {
     int n;
     vector<T> tree;
     vector<T> lazy;
 
     // O(n) time, O(n) space.
-    SumRangeSegTree(int size) : n(size), tree(4 * size, T{}), lazy(4 * size, T{}) {}
+    SumAddRangeSegTree(int size) : n(size), tree(4 * size, T{}), lazy(4 * size, T{}) {}
 
     // O(n) time, O(n) space - builds from initial values.
-    SumRangeSegTree(const vector<T> &a)
+    SumAddRangeSegTree(const vector<T> &a)
         : n(a.size()),
           tree(4 * a.size(), T{}),
           lazy(4 * a.size(), T{})
@@ -104,5 +109,5 @@ private:
 };
 
 // Convenience alias for the common case of summing long long values.
-using LongSumRangeSegTree = SumRangeSegTree<ll>;
+using LongSumAddRangeSegTree = SumAddRangeSegTree<ll>;
 } // namespace cp
