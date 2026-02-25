@@ -113,4 +113,7 @@ private:
                node->lazy * (min(tr, r) - max(tl, l) + 1);
     }
 };
+
+// Convenience alias for the common case of summing long long values.
+using LongDynSegTree = DynSegTree<ll>;
 } // namespace cp
