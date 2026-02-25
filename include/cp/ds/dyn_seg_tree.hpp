@@ -13,8 +13,8 @@ namespace cp
 // T must be wide enough to hold lazy * (hi - lo + 1) without overflow. For ranges up to
 // 1e9 with values up to 1e9, use ll (not int).
 //
-// To adapt for other operations (e.g. range-set, range-min), modify push_down to use
-// the appropriate lazy-application and combine logic.
+// To adapt for other operations (e.g. range-set, range-min), modify push_down and query
+// to use the appropriate lazy-application and combine logic.
 template <typename T>
 struct DynSegTree
 {
@@ -94,8 +94,8 @@ private:
     //
     // push_down is not called - it would allocate nodes inside a read-only operation.
     // Instead, at each partial overlap, node->lazy * overlap([l,r], [tl,tr]) is added
-    // to correct for the pending lazy. This adds complexity over push_down (which
-    // pushes all info to children to be summed directly), but keeps query const.
+    // to correct for the pending lazy. This logically adds complexity over push_down
+    // (which pushes all info to children to be summed directly), but keeps query const.
     //
     // Null children return T{} safely since ancestor lazies are handled by the overlap
     // term above them.
