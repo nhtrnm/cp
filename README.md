@@ -38,6 +38,22 @@ make test
 | ------------- | ---------------- |
 | `mod_int.hpp` | Modular integers |
 
+### `cp/graph`
+
+_Empty - coming soon._
+
+### `cp/strings`
+
+_Empty - coming soon._
+
+### `cp/geometry`
+
+_Empty - coming soon._
+
+### `cp/dp`
+
+_Empty - coming soon._
+
 ## Adding a new module
 
 1. Create `include/cp/<category>/<module_name>.hpp`
