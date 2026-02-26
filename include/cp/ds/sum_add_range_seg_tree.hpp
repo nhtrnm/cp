@@ -5,7 +5,7 @@ namespace cp
 {
 // Specialized array-backed segment tree for range-add updates and range-sum queries.
 //
-// A general policy-based LazySegTree (range_seg_tree.hpp) also exists and covers this
+// A general policy-based RangeSegTree (range_seg_tree.hpp) also exists and covers this
 // and other combinations (range-set, range-min, etc.). This version is kept as a
 // simpler, self-contained alternative - useful when the policy abstraction overhead is
 // not worth it for a problem that just needs range-add + range-sum.
