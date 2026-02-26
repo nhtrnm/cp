@@ -25,10 +25,10 @@ struct SegTree
     vector<T> tree;
 
     // O(n) time, O(n) space.
-    SegTree(int size) : n(size), tree(4 * size, identity) {}
+    SegTree(int size) : n(size), tree(4 * size, T{}) {}
 
     // O(n) time, O(n) space - builds from initial values.
-    SegTree(const vector<T> &a) : n(a.size()), tree(4 * a.size(), identity)
+    SegTree(const vector<T> &a) : n(a.size()), tree(4 * a.size(), T{})
     {
         build(1, 0, n - 1, a);
     }
