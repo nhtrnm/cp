@@ -42,7 +42,7 @@ InsertNewlineAtEOF                       : true
 PackConstructorInitializers              : CurrentLine
 # PointerAlignment                         : Right
 # ReferenceAlignment                       : Pointer
-# ReflowComments                           : true
+ReflowComments                           : false
 SeparateDefinitionBlocks                 : Always
 # SpaceAfterCStyleCast                     : false
 Standard                                 : c++20
