@@ -32,6 +32,12 @@ struct DynSegTree
     Node *root;
 
     // O(1) time, O(1) space.
+    DynSegTree(ll size) : lo(0), hi(size - 1), root(new Node())
+    {
+        assert(size > 0);
+    }
+
+    // O(1) time, O(1) space.
     DynSegTree(ll l, ll r) : lo(l), hi(r), root(new Node())
     {
         assert(l <= r);
